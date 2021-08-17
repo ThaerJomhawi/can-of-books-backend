@@ -5,9 +5,16 @@ const express = require("express");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const jwksClient = require("jwks-rsa");
-
+const mongoose=require('mongoose')
 const app = express();
 app.use(cors());
+const bookController=require('./controllers/Book.controller')
+app.get('/books',bookController)
+
+
+
+mongoose.connect('mongodb://localhost:27017/canOfBooks', {useNewUrlParser: true,useUnifiedTopology: true});
+
 
 const PORT = process.env.PORT || 3001;
 const client = jwksClient({
